@@ -11,12 +11,17 @@ class SupervisorAgent:
             state["next"] = 0
         if not state.get('context'):
             state["context"] = ""
+        if not state.get('counter'):
+            state["counter"] = 0
             
         return state
 
     def route(self, state):
         if self.next >= len(self.order):
             return END
+        if self.counter >=2:
+            return 'call_assistance'
+        
         print("SUPERVISOR route", state["next"])
         return self.order[state["next"]]
         

@@ -10,12 +10,12 @@ load_dotenv()
 MODEL = os.getenv("MODEL")
 
 @tool
-def invalid(field:str, value:str, counter=1):
+def invalid(field:str, value:str, counter:int):
     """
     Call this tool if the user's response is not valid for one of the fields you are verifying.
     """
-    if counter >= 2:
-        return f"The user's response for {field} with value {value} is not valid. Politely end the conversation and after ask them to call the support number."
+    if counter >= 1:
+        return f"The user's response for {field} with value {value} is not valid. Politely end the conversation and after ask them to call the support number. Give them the support number: 1-800-555-1234. You must not continue with the conversation but only reply about the support number"
     else:
         return f"The user's response for {field} with value {value} is not valid. Indicate to the user that it does not match our records. Please ask the user one more time."
 
@@ -54,8 +54,6 @@ class VerificationAgent:
         
     def __call__(self, state):
         result = self.chain.invoke(state)
-        if not state.get("counter") or not result.tool_calls:
-            state["counter"] = 0
         return {**state, "messages": [result]}
     
 def process_tool(state): 
@@ -70,7 +68,7 @@ def process_tool(state):
             #print('TOOL CALL**********************', tools_by_name[tool_call["name"]].invoke({**tool_call["args"], "counter": state["counter"]}))
             message = tools_by_name[tool_call["name"]].invoke({**tool_call["args"], "counter": state["counter"]})
             if state["counter"] >= 2:
-                state["counter"] = 0
+                #state["counter"] = 0
                 messages.append(ToolMessage(name=tool_call["name"], tool_call_id=tool_call["id"], content=message))
             else:
                 state["counter"] += 1
