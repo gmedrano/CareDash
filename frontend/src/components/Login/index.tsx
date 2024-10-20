@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-//import { div, button, div, label, input, div } from '@chakra-ui/react';
 import { login } from '../../api';
-//import './login.css';
 import loginBg from '../../../public/images/login-bg.jpg';
 import logo from '../../../public/images/caredash-logo-purple.svg';
 
@@ -11,6 +9,7 @@ interface LoginProps {
 }
 
 export const Login: React.FC<LoginProps> = ({ onLogin }) => {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -27,7 +26,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
   return (
     <>
       <div className="grid-container">
-        <div className="column-a" style={{ backgroundImage: `url(${loginBg})` }}>
+        <div className="column-a" style={{ backgroundImage: `linear-gradient(rgba(106, 93, 183, 0.8), rgba(106, 93, 183, 0.8)),url(${loginBg})` }}>
         </div>
         <div className="column-b">
           <div className="login-panel">
