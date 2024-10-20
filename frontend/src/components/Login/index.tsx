@@ -31,7 +31,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin }) => {
         </div>
         <div className="column-b">
           <div className="login-panel">
-            <img src="../../../public/images/caredash-logo-purple.svg" className="logo-medium" alt="CareDash Logo" />
+            <img src={logo} className="logo-medium" alt="CareDash Logo" />
             <h6>Please provide your credentials to get you started on your health journey:</h6>
             <input className="textbox" type="text" placeholder="User" onChange={(e: any) => setUsername(e.target.value)} />
             <input className="textbox" type="password" placeholder="Password" onChange={(e: any) => setPassword(e.target.value)} />
