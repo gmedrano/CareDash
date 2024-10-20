@@ -85,13 +85,14 @@ async def upload_file(file: UploadFile = File(...)):
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
 @app.post("/api/clear_memory")
-async def webrtc_clear_memory(obj: dict, current_user: dict = Depends(get_current_user)):
+async def clear_memory(obj: dict, current_user: dict = Depends(get_current_user)):
     config = {"configurable": {"thread_id": current_user.username}}
+    print('*********USER', current_user.username)
     #state = app.get_state(config=config)
     #messages = state.values.get("messages", [])
     #for message in messages:
     #    app.update_state(config, {"messages": RemoveMessage(id=message.id)})
-    #return JSONResponse(content={"status": "success"})
+    return JSONResponse(content={"status": "success"})
 
 app.mount("/assets", StaticFiles(directory=os.path.join(frontend_dir, "assets")), name="static")
 

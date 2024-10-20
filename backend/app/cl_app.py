@@ -18,7 +18,7 @@ async def on_chat_start():
         "message_history",
         [{"role": "system", "content": "You are a helpful assistant."}],
     )
-    await cl.Message(content="Connected to Chainlit!").send()
+    await cl.Message(content="Hi, how can I help you today?").send()
 
 
 @cl.on_message

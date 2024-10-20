@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-//import { Box, VStack } from '@chakra-ui/react';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import { sessionState, useChatSession } from "@chainlit/react-client";
 import { Chat } from "./components/Chat";
-import  {Login}  from "./components/Login";
+import { Login } from "./components/Login";
 import { useRecoilValue } from "recoil";
+import DocumentManagement from './components/DocumentManagement';
+import PatientRecords from './components/PatientRecords';
+import PatientManagement from './components/PatientDetails';
+
 
 const userEnv = {};
 
@@ -12,7 +16,7 @@ function App() {
   const session = useRecoilValue(sessionState);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState('');
-  
+
   useEffect(() => {
     if (session?.socket.connected) {
       return;
@@ -51,17 +55,38 @@ function App() {
     setToken('');
     localStorage.removeItem('token');
   };
+  const Main = () => {
+    return (
+      <>
+        <div>
+        {!isLoggedIn ? (
+          <Login onLogin={handleLogin} />
+        ) : (<>
+          <Chat token={token} onLogout={handleLogout} />
+          <nav>
+            <ul>
+              <li><Link to="/document-management">Document Management</Link></li>
+              <li><Link to="/patient-records">Patient Records</Link></li>
+              <li><Link to="/patient-management">Patient Management</Link></li>
+            </ul>
+          </nav></>
+        )}
+      </div>
+      </>
+    )
+  }
 
   return (
-    <>
-      <div>
-          {!isLoggedIn ? (
-      <> <Login onLogin={handleLogin} /></>
-      ) : (
-        <Chat token={token} onLogout={handleLogout} />
-      )}
-      </div>
-    </>
+    <Router>
+    
+
+      <Routes>
+       <Route path="/" element={<Main />} />
+        <Route path="/document-management" element={<DocumentManagement />} />
+        <Route path="/patient-records" element={<PatientRecords />} />
+        <Route path="/patient-management" element={<PatientManagement />} />
+      </Routes>
+    </Router>
   );
 }
 

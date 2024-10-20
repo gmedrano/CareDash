@@ -64,6 +64,720 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
+
+  /* Reset default margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set html and body to take full height */
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+}
+
+/* Grid container to split the page into two columns */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+  height: 100%;
+}
+
+/* Left column with light gray background and placeholder for image */
+.column-a {
+  background-color: #f0f0f0; /* Light gray background */
+  /* Placeholder for background image */
+  background: linear-gradient(rgba(106, 93, 183, 0.8), rgba(106, 93, 183, 0.8)), url('../img/login-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Right column */
+.column-b {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login panel centered using Flexbox */
+.login-panel {
+  width: 90%;
+  max-width: 500px;
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #9a32e8;
+  padding: 40px;
+  /* Center content within the panel */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+/* Styling for input fields */
+.login-panel input {
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Styling for the login button */
+.login-panel button {
+  font-size: 16px;
+  cursor: pointer;
+  padding: 16px 20px;
+  background-image: linear-gradient(#a08dff, #685bb5);
+  text-shadow: #685da0 0px 0px 2px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  margin-top: 1rem;
+}
+
+.login-panel button:hover {
+  background-image: linear-gradient(#685bb5, #685bb5);
+}
+
+/* Optional: Center the panel content horizontally */
+.login-panel input,
+.login-panel button {
+  width: 100%;
+}
+
+.textbox, input {
+  /* background-color: rgb(246, 243, 255); */
+  background-color: rgb(249, 247, 255);
+  border: 1px solid rgb(209, 198, 247);
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 13px;
+}
+
+.textbox:active,
+.textbox:focus {
+  background-color: white;
+}
+
+.textbox::placeholder {
+  font-family: 'Open Sans';
+  color: rgb(121, 121, 121);
+  font-size: 0.8rem;
+}
+
+.logo-medium {
+  width: 50%;
+  flex-direction: column;
+  align-self: center;
+  padding: 2rem 0 3rem 0;
+}
+
+h3 {
+  margin-bottom: 1rem;
+}
+
+h6 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* Stack columns vertically */
+  }
+
+  .column-a {
+    display: none; /* Hide the left column */
+  }
+
+  .column-b {
+    padding: 20px;
+  }
+
+  .login-panel {
+    width: 100%;
+    max-width: none;
+    border: none;
+  }
+}
+
+/* Dashboard Styles */
+
+/* Grid container for the dashboard */
+.dashboard-container {
+  display: grid;
+  grid-template-rows: auto 1fr; /* Top bar and main content */
+  height: 100vh;
+}
+
+/* Top Bar */
+.top-bar {
+  grid-row: 1 / 2;
+  grid-column: 1 / 3;
+  background-color: #47068e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 56px;
+}
+
+.top-bar .logo-small img {
+  height: 25px;
+}
+
+.top-bar .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.top-bar .user-info .avatar {
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.top-bar .user-info .user-name {
+  font-size: 12px;
+  color: white;
+}
+
+/* Main Content */
+.main-content {
+  grid-row: 2 / 3;
+  grid-column: 1 / 3;
+  display: grid;
+  grid-template-columns: 250px 1fr; /* Nav panel and view content */
+  height: 100%;
+}
+
+/* Navigation Panel */
+.nav-panel {
+  background-color: #8356e4;
+  /* padding: 20px; */
+}
+
+.nav-panel ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-panel a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  width: 100%;
+  display: block;
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.nav-panel a:hover {
+  text-decoration: none;
+  background-color: color(srgb 0.4138 0.2584 0.76);
+}
+
+.nav-panel .active, .nav-panel .active:hover {
+  background-image: linear-gradient(to right, rgb(79, 25, 182), rgb(160, 0, 255));
+  box-shadow: 3px 2px 3px #240425b8;
+  width: 95%;
+  margin-left: 5px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.nav-panel a .nav-icon {
+  display: flex;
+  margin-right: 10px;
+}
+
+.nav-panel a .nav-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+/* View Content */
+.view-content {
+  background-color: #ffffff;
+  padding: 40px 60px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Hide the navigation panel */
+  .nav-panel {
+    display: none;
+  }
+
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hamburger menu */
+  .top-bar .menu-toggle {
+    display: block;
+    cursor: pointer;
+  }
+
+  .top-bar .logo-small {
+    flex: 1;
+  }
+
+  /* Hide user info on mobile */
+  .top-bar .user-info {
+    display: none;
+  }
+}
+
+.top-bar .menu-toggle {
+  display: none; /* Hidden by default */
+  font-size: 24px;
+}
+
+/* Documents Management Styles */
+
+/* Sub Navigation */
+.sub-nav {
+  margin-bottom: 20px;
+}
+
+.sub-nav ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  border-bottom: 1px solid #dde4ff;
+}
+
+.sub-nav li {
+  margin-right: 40px;
+}
+
+.sub-nav a {
+  text-decoration: none;
+  color: #858585;
+  padding: 10px 0;
+  display: block;
+}
+
+.sub-nav a.active {
+  border-bottom: 2px solid #9a32e8;
+  color: #9a32e8;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0 10px 0;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 26px;
+  color: #333;
+  font-weight: 500;
+}
+
+.upload-button {
+  padding: 10px 20px;
+  background-color: #9a32e8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.upload-button:hover {
+  background-color: #7a27b3;
+}
+
+.page-description p {
+  font-weight: 200;
+}
+
+/* Documents Table */
+.documents-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.documents-table thead {
+  background-color: #fff;
+}
+
+.documents-table th,
+.documents-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #dee5ff;
+  font-size: 14px;
+}
+
+.documents-table th {
+  color: rgb(82, 85, 228);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.documents-table td {
+  /* font-weight: 400; */
+}
+
+.documents-table tbody tr:nth-child(even) {
+  background-color: #fff; /* Zebra pattern */
+}
+
+.documents-table tbody tr:nth-child(odd) {
+  background-color: #f6f8ff;
+}
+
+.documents-table tbody tr:hover {
+  /* background-color: #f1f1f1; */
+}
+
+.documents-table .actions {
+  display: flex;
+  gap: 20px;
+}
+
+.documents-table .actions a {
+  display: inline-block;
+}
+
+.documents-table .actions img {
+  width: 20px;
+  height: 20px;
+}
+
+/* MODAL */
+/* Hide the dialog by default */
+.modal {
+  display: none;
+}
+
+/* Show the dialog when the checkbox is checked */
+.modal-toggle:checked + .modal {
+  display: block;
+}
+
+/* Modal Styling */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  padding: 0;
+  width: 400px;
+  max-width: 90%;
+  background-color: #fff;
+  border-radius: 10px;
+  z-index: 1000;
+}
+
+/* Overlay to dim the background */
+.modal-toggle:checked ~ .overlay {
+  display: block;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Upload Form Styling */
+.upload-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-form h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.upload-form input[type="file"] {
+  margin-bottom: 20px;
+  padding: 40px 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-buttons button,
+.modal-buttons .close-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-buttons button {
+  background-color: #9a32e8;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.modal-buttons .close-button {
+  background-color: #e1e1e1;
+  color: #000;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+/* Optional: Style the close button on hover */
+.modal-buttons .close-button:hover {
+  background-color: #bbb;
+}
+
+/* Optional: Style the upload button on hover */
+.modal-buttons button:hover {
+  background-color: #7a27b3;
+}
+
+
+/* Patient Details Styles */
+
+/* Patient Information Section */
+.patient-details {
+  margin-bottom: 40px;
+}
+
+.patient-details h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.patient-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  font-size: 16px;
+  /* border: 1px solid rgb(209, 198, 247); */
+  background-color: rgb(249, 247, 255);
+  border-radius: 4px;
+}
+
+/* Medical History Section */
+.medical-history {
+  margin-bottom: 40px;
+}
+
+.medical-history h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.medical-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.medical-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.medical-field h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.medical-field p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .patient-form {
+    flex-direction: column;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+  .medical-grid {
+    flex-direction: column;
+  }
+}
+
+
+/* Style the select element within form-group */
+.form-group select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid rgb(209, 198, 247);
+  border-radius: 4px;
+  background-color: rgb(246, 243, 255);
+  border-radius: 5px;
+  color: #333;
+  cursor: pointer;
+  width: 300px;
+  /* Remove default arrow */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Position for custom arrow */
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg%20xmlns="http://www.w3.org/2000/svg"%20width="14"%20height="10"%20viewBox="0%200%2014%2010"><polyline%20points="1%201%207%209%2013%201"%20style="fill:none;stroke:%23333;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: 40px; /* Space for the custom arrow */
+}
+
+/* Optional: Hover and Focus States */
+.form-group select:hover,
+.form-group select:focus {
+  border-color: #685bb5; /* Darker purple on hover/focus */
+  outline: none;
+}
+
+/* Adjust the label if needed */
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+
+/* Important Fields Panel */
+.important-fields {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: rgb(229, 243, 255);
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+}
+
+.important-fields p {
+  font-size: 24px;
+  font-weight: 600;
+  color: color(srgb 0.2886 0.4172 0.52);
+}
+
+.important-fields h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: rgb(129, 185, 221);
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 20px;
+}
+
+.field-group:last-child {
+  margin-right: 0;
+}
+
+.field-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Medical History Section */
+.medical-history {
+  margin-bottom: 40px;
+}
+
+.medical-history h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.medical-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.medical-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.medical-field h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.medical-field p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .patient-form {
+    flex-direction: column;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+  .important-fields {
+    flex-direction: column;
+  }
+  .field-group {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  .medical-grid {
+    flex-direction: column;
+  }
+}
 }
  
 @layer base {

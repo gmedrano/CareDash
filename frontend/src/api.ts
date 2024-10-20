@@ -1,5 +1,6 @@
+const API_URL = "http://localhost:8080"
 export const login = async (username: string, password: string): Promise<string> => {
-    const response = await fetch(`/api/token`, {
+    const response = await fetch(`${API_URL}/api/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -19,7 +20,7 @@ export const login = async (username: string, password: string): Promise<string>
   };
   
   export const clearMessages = async (token:string) => {
-    const response = await fetch(`/api/clear_memory`, {
+    const response = await fetch(`${API_URL}/api/clear_memory`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

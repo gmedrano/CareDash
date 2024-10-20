@@ -19,8 +19,6 @@ class SupervisorAgent:
     def route(self, state):
         if self.next >= len(self.order):
             return END
-        if self.counter >=2:
-            return 'call_assistance'
         
         print("SUPERVISOR route", state["next"])
         return self.order[state["next"]]

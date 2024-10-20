@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //import { div, button, div, label, input, div } from '@chakra-ui/react';
 import { login } from '../../api';
-import './login.css';
+//import './login.css';
 import loginBg from '../../../public/images/login-bg.jpg';
 import logo from '../../../public/images/caredash-logo-purple.svg';
 
