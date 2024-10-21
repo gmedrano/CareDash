@@ -8,20 +8,51 @@ import {
   IStep,
 } from "@chainlit/react-client";
 import { useState } from "react";
+import Question  from "./Question";
 import caredashLogoWhite from '../../public/images/caredash-logo-white.svg';
 import userAvatar from '../../public/images/user-avatar.png';
 import dashboardIcon from '../../public/images/dashboard-icon.svg';
 import patientsIcon from '../../public/images/patients-icon.svg';
 import docsIcon from '../../public/images/docs-icon.svg';
 
-
+function extractJSON(message: string) {
+  try {
+    message = message.replace(/```json\s*|```/g, '')
+    return JSON.parse(message.trim());
+  } catch (error) {
+    return null;
+  }
+}
+  
 export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
   const [inputValue, setInputValue] = useState("");
   const { sendMessage } = useChatInteract();
   const { messages } = useChatMessages();
 
+  const handleChatAnswer = (id:string, answer:any) => {
+    if (id && answer) {
+      if (Array.isArray(answer)) {
+        const message = {
+          name: "user",
+          type: "user_message" as const,
+          output: answer.join(", "),
+        };
+        sendMessage(message, []);
+      } else {
+        const message = {
+          name: "user",
+          type: "user_message" as const,
+          output: answer,
+        };
+        sendMessage(message, []);
+      }
+      setInputValue("");
+    }
+  }
+
   const handleSendMessage = () => {
     const content = inputValue.trim();
+    
     if (content) {
       const message = {
         name: "user",
@@ -42,11 +73,22 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
       undefined,
       dateOptions
     );
+    console.log('Message****', message.output)
+    const splitData = message.output.split('%%');
+    let outputMessage = splitData[0];
+    let content: any = null;
+    if (splitData.length > 1) {
+      const _json = extractJSON(splitData[1]);
+      console.log('Extracted JSON', _json);
+      if (_json) {
+        content = <Question question={_json} onAnswer={handleChatAnswer } />
+      }
+    }
     return (
       <div key={message.id} className="flex items-start space-x-2">
         <div className="w-20 text-sm text-green-500">{message.name}</div>
         <div className="flex-1 border rounded-lg p-2">
-          <p className="text-black dark:text-white">{message.output}</p>
+          <p className="text-black dark:text-white">{outputMessage} {content}</p>
           <small className="text-xs text-gray-500">{date}</small>
         </div>
       </div>
@@ -110,7 +152,7 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
 
             <div className="view-content">
             <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
-      <Button onClick={onLogout}>Logout</Button>
+     
       <div className="flex-1 overflow-auto p-6">
         <div className="space-y-4">
           {messages.map((message) => renderMessage(message))}
@@ -137,6 +179,7 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
           <Button onClick={() => clearMessages(token)} type="submit">
             Reset
           </Button>
+          <Button onClick={onLogout}>Logout</Button>
         </div>
       </div>
     </div>
@@ -164,3 +207,5 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
 </>
   );
 }
+
+

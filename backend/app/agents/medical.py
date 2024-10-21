@@ -19,7 +19,7 @@ def user_query(query:str):
 @tool
 def completed(**kwargs):
     """
-    Call this tool when allmedical questions have been completed.
+    Call this tool when all medical questions have been completed.
     """
     return True
 
@@ -50,6 +50,6 @@ class MedicalQuestionAgent:
         self.questions = questions
         
     def __call__(self, state):
-        results = self.chain.invoke({**state,  "questions": self.questions})
-        return {**state, "messages":[results] }
+        response = self.chain.invoke({**state, "questions": self.questions})
+        return {**state, "messages":[response] }
     

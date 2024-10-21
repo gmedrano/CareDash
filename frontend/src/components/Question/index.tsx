@@ -112,7 +112,6 @@ const MultiSelect: React.FC<{ question: MultiSelectQuestion; onAnswer: (id: stri
 
   return (
     <div className="question multi-select">
-      <p>{question.text}</p>
       <div className="options">
         {question.options.map((option, index) => (
           <button
@@ -144,7 +143,6 @@ const SingleSelect: React.FC<{ question: SingleSelectQuestion; onAnswer: (id: st
 
   return (
     <div className="question single-select">
-      <p>{question.text}</p>
       <div className="options">
         {question.options.map((option, index) => (
           <button
@@ -168,7 +166,6 @@ const YesNo: React.FC<{ question: YesNoQuestion; onAnswer: (id: string, answer: 
 
   return (
     <div className="question yes-no">
-      <p>{question.text}</p>
       <div className="options">
         <button className="option-btn" onClick={() => handleSelect('Yes')}>Yes</button>
         <button className="option-btn" onClick={() => handleSelect('No')}>No</button>
@@ -178,58 +175,20 @@ const YesNo: React.FC<{ question: YesNoQuestion; onAnswer: (id: string, answer: 
 };
 
 const TextInput: React.FC<{ question: TextInputQuestion; onAnswer: (id: string, answer: string) => void }> = ({ question, onAnswer }) => {
-  const [answer, setAnswer] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAnswer(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    onAnswer(question.id, answer);
-  };
-
+  console.log(question, onAnswer)
   return (
-    <div className="question text-input">
-      <p>{question.text}</p>
-      <input
-        type="text"
-        value={answer}
-        onChange={handleChange}
-        placeholder="Type your answer here"
-      />
-      <SubmitButton onSubmit={handleSubmit} />
-    </div>
+    <>
+    {''}
+    </>
   );
 };
 
 const NumericInput: React.FC<{ question: NumericInputQuestion; onAnswer: (id: string, answer: number) => void }> = ({ question, onAnswer }) => {
-  const [answer, setAnswer] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAnswer(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    const numericAnswer = parseFloat(answer);
-    if (!isNaN(numericAnswer)) {
-      onAnswer(question.id, numericAnswer);
-    }
-  };
-
+  console.log(question, onAnswer)
   return (
-    <div className="question numeric-input">
-      <p>{question.text}</p>
-      <input
-        type="number"
-        value={answer}
-        onChange={handleChange}
-        min={question.range?.min}
-        max={question.range?.max}
-        placeholder="Enter a number"
-      />
-      {question.unit && <span className="unit">{question.unit}</span>}
-      <SubmitButton onSubmit={handleSubmit} />
-    </div>
+    <>
+    {''}
+    </>
   );
 };
 
@@ -246,7 +205,6 @@ const DateInput: React.FC<{ question: DateInputQuestion; onAnswer: (id: string, 
 
   return (
     <div className="question date-input">
-      <p>{question.text}</p>
       <input
         type="date"
         value={answer}

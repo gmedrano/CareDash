@@ -1,0 +1,110 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier for the question"
+      },
+      "text": {
+        "type": "string",
+        "description": "The question text"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "MULTI_SELECT",
+          "SINGLE_SELECT",
+          "YES_NO",
+          "TEXT_INPUT",
+          "NUMERIC_INPUT",
+          "DATE_INPUT",
+          "LIKERT_SCALE",
+          "MATRIX",
+          "RANKING",
+          "SLIDER"
+        ],
+        "description": "The type of question"
+      },
+      "options": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Options for multi-select, single-select, or ranking questions"
+      },
+      "range": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "step": {
+            "type": "number"
+          }
+        },
+        "required": ["min", "max"],
+        "description": "Range for numeric input, Likert scale, or slider questions"
+      },
+      "matrix": {
+        "type": "object",
+        "properties": {
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["rows", "columns"],
+        "description": "Row and column labels for matrix questions"
+      },
+      "unit": {
+        "type": "string",
+        "description": "Unit for numeric input questions (e.g., 'kg', 'cm')"
+      },
+      "format": {
+        "type": "string",
+        "description": "Format for date input questions (e.g., 'YYYY-MM-DD')"
+      },
+      "labels": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "string"
+          },
+          "max": {
+            "type": "string"
+          }
+        },
+        "description": "Labels for the minimum and maximum points of a slider or Likert scale"
+      },
+      "required": {
+        "type": "boolean",
+        "description": "Whether the question is required to be answered"
+      },
+      "conditional": {
+        "type": "object",
+        "properties": {
+          "dependsOn": {
+            "type": "string"
+          },
+          "condition": {
+            "type": "string"
+          }
+        },
+        "description": "Specifies if this question is conditional on another question's answer"
+      }
+    },
+    "required": ["id", "text", "type"],
+    "additionalProperties": false
+  }
