@@ -14,11 +14,13 @@ from chainlit.auth import create_jwt
 from chainlit.user import User
 from chainlit.utils import mount_chainlit
 from pymongo.mongo_client import MongoClient
+from langgraph.checkpoint.memory import MemorySaver
 from .agents.data_processor import PDFProcessor
 from .auth import get_current_user, auth_router
+from .graph import workflow
+
 
 load_dotenv()
-
 
 mongo_client = MongoClient(os.getenv("MONGO_URI"))
 try:
@@ -86,12 +88,11 @@ async def upload_file(file: UploadFile = File(...)):
 
 @app.post("/api/clear_memory")
 async def clear_memory(obj: dict, current_user: dict = Depends(get_current_user)):
-    config = {"configurable": {"thread_id": current_user.username}}
-    print('*********USER', current_user.username)
-    #state = app.get_state(config=config)
-    #messages = state.values.get("messages", [])
-    #for message in messages:
-    #    app.update_state(config, {"messages": RemoveMessage(id=message.id)})
+    config = {"configurable": {"thread_id": "1"}}
+    state = workflow.get_state(config=config)
+    messages = state.values.get("messages", [])
+    for message in messages:
+        workflow.update_state(config, {"messages": RemoveMessage(id=message.id)})
     return JSONResponse(content={"status": "success"})
 
 app.mount("/assets", StaticFiles(directory=os.path.join(frontend_dir, "assets")), name="static")

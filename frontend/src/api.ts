@@ -20,6 +20,7 @@ export const login = async (username: string, password: string): Promise<string>
   };
   
   export const clearMessages = async (token:string) => {
+    console.log('clearMessages*********', token)
     const response = await fetch(`${API_URL}/api/clear_memory`, {
       method: 'POST',
       headers: {

@@ -10,7 +10,6 @@ export default function DocumentManagement() {
     return (
         <>
             <div className="dashboard-container">
-
                 <div className="top-bar">
                     <div className="menu-toggle">
                         &#9776;
@@ -102,7 +101,7 @@ export default function DocumentManagement() {
                                         <td>Sample comment</td>
                                         <td className="actions">
                                             <a href="#" className="archive-icon">
-                                                <img src="img/archive-icon.svg" alt="Archive" />
+                                                <img src={archiveIcon} alt="Archive" />
                                             </a>
                                             <a href="#" className="edit-icon">
                                                 <img src={editIcon} alt="Edit" />
@@ -130,10 +129,10 @@ export default function DocumentManagement() {
                                         <td>Sample comment</td>
                                         <td className="actions">
                                             <a href="#" className="archive-icon">
-                                                <img src="img/archive-icon.svg" alt="Archive" />
+                                                <img src={archiveIcon} alt="Archive" />
                                             </a>
                                             <a href="#" className="edit-icon">
-                                                <img src="img/edit-icon.svg" alt="Edit" />
+                                                <img src={editIcon} alt="Edit" />
                                             </a>
                                         </td>
                                     </tr>

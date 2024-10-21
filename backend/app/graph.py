@@ -51,6 +51,7 @@ graph.add_conditional_edges(
     {"__end__": END, "rag_tool_node": "rag_tool_node"}
 )
 
+workflow = graph.compile(checkpointer=memory)
 
 async def run_verfication(app, fields="", values=""):
     config = {"configurable": {"thread_id": 1}}

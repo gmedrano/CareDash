@@ -8,6 +8,12 @@ import {
   IStep,
 } from "@chainlit/react-client";
 import { useState } from "react";
+import caredashLogoWhite from '../../public/images/caredash-logo-white.svg';
+import userAvatar from '../../public/images/user-avatar.png';
+import dashboardIcon from '../../public/images/dashboard-icon.svg';
+import patientsIcon from '../../public/images/patients-icon.svg';
+import docsIcon from '../../public/images/docs-icon.svg';
+
 
 export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
   const [inputValue, setInputValue] = useState("");
@@ -48,7 +54,62 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
+    <>
+    <div className="dashboard-container">
+        <div className="top-bar">
+            <div className="menu-toggle">
+                &#9776;
+            </div>
+            <div className="logo-small">
+                <img src={caredashLogoWhite} alt="CareDash Logo" />
+            </div>
+            <div className="user-info">
+                <img src={userAvatar} alt="User Avatar" className="avatar" />
+                <span className="user-name">Tony Stark</span>
+            </div>
+        </div>
+
+        <div className="main-content">
+
+            <nav className="nav-panel">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i className="nav-icon">
+                                <img src={dashboardIcon} alt="Dashboard Icon" />
+                            </i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className="nav-icon">
+                                <img src={patientsIcon} alt="Patients Icon" />
+                            </i>
+                            Patient Records
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" className="active">
+                            <i className="nav-icon">
+                                <img src={docsIcon} alt="Docs Icon" />
+                            </i>
+                            Document Management
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i className="nav-icon">
+                                <img src={docsIcon} alt="Docs Icon" />
+                            </i>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div className="view-content">
+            <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
       <Button onClick={onLogout}>Logout</Button>
       <div className="flex-1 overflow-auto p-6">
         <div className="space-y-4">
@@ -79,5 +140,27 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
         </div>
       </div>
     </div>
+  
+            </div>
+        </div>
+    </div>
+
+    <input type="checkbox" id="modal-toggle" className="modal-toggle" style={{ visibility: "hidden" }} />
+
+
+    <dialog className="modal" open>
+        <form method="dialog" className="upload-form">
+            <h2>Upload Document</h2>
+            <input type="file" name="document" />
+            <div className="modal-buttons">
+                <button type="submit">Upload</button>
+                <label htmlFor="modal-toggle" className="close-button">Cancel</label>
+            </div>
+        </form>
+    </dialog>
+
+
+    <div className="overlay"></div>
+</>
   );
 }
