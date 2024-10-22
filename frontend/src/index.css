@@ -854,3 +854,12 @@ h6 {
 .conversation-bubble .submit-btn:hover {
   background-color: #7a27b3;
 }
+
+.static-nav {
+  border: 1px solid red;
+}
+
+.static-nav ul {
+  display: block;
+  position: absolute;
+}
