@@ -73,7 +73,7 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
       undefined,
       dateOptions
     );
-    console.log('Message****', message.output)
+    console.log('Message****', message)
     const splitData = message.output.split('%%');
     let outputMessage = splitData[0];
     let content: any = null;
@@ -85,7 +85,7 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
       }
     }
     return (
-      <div key={message.id} className="flex items-start space-x-2">
+      <div key={message.id} className={message.type == 'user_message' ? 'user-avatar' : 'chatbot-avatar'+" flex items-start space-x-2"}>
         <div className="user-label">{message.name}</div>
         <div className="conversation-bubble">
           <p className="text-black dark:text-white">{outputMessage} {content}</p>
