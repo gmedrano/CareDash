@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
+    "dev:presentation": "vite --host --port 5174 --mode presentation",
     "build": "tsc && vite build",
+    "build:presentation": "tsc && vite build --mode presentation",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
