@@ -109,11 +109,11 @@ const MultiSelect: React.FC<{ question: MultiSelectQuestion; onAnswer: (id: stri
   const handleSubmit = () => {
     onAnswer(question.id, selectedOptions);
   };
-
+  const options = [...question.options, "None of the above"]
   return (
     <div className="question multi-select">
       <div className="options">
-        {question.options.map((option, index) => (
+        {options.map((option, index) => (
           <button
             key={index}
             className={`option-btn ${selectedOptions.includes(option) ? 'selected' : ''}`}
