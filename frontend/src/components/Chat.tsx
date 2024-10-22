@@ -162,7 +162,7 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
         <div className="flex items-center space-x-2">
           <Input
             autoFocus
-            className="flex-1"
+            className="flex-1 user-input"
             id="message-input"
             placeholder="Type a message"
             value={inputValue}
@@ -173,13 +173,13 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
               }
             }}
           />
-          <Button onClick={handleSendMessage} type="submit">
+          <Button onClick={handleSendMessage} type="submit" className="large-button">
             Send
           </Button>
-          <Button onClick={() => clearMessages(token)} type="submit">
+          <Button onClick={() => clearMessages(token)} type="submit" className="large-button">
             Reset
           </Button>
-          <Button onClick={onLogout}>Logout</Button>
+          <Button onClick={onLogout} className="large-button">Logout</Button>
         </div>
       </div>
     </div>
