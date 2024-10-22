@@ -99,16 +99,16 @@ export function Chat({ token, onLogout }: { token: string, onLogout: () => void 
     <>
       <div className="dashboard-container">
         <div className="top-bar">
-          <div className="menu-toggle">
-            &#9776;
-          </div>
-          <div className="logo-small">
-            <img src={caredashLogoWhite} alt="CareDash Logo" />
-          </div>
-          <div className="user-info">
-            <img src={userAvatar} alt="User Avatar" className="avatar" />
-            <span className="user-name">Tony Stark</span>
-          </div>
+            <div className="menu-toggle">
+                &#9776;
+            </div>
+            <div className="logo-small">
+                <img src={caredashLogoWhite} alt="CareDash Logo" />
+            </div>
+            <div className="user-info">
+                <img src={userAvatar} alt="User Avatar" className="avatar" />
+                <span className="user-name">Tom Smith</span>
+            </div>
         </div>
 
         <div className="main-content">
