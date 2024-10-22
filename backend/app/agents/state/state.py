@@ -22,7 +22,9 @@ class GraphState(TypedDict):
     fields:str
     values:str
     counter:int
+    current_field:str
     question: str #current user input. It may or may not be a 'question'
     context: str
     completed: str
     next:int
+    

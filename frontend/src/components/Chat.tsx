@@ -162,6 +162,7 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
         <div className="flex items-center space-x-2">
           <Input
             autoFocus
+            autoComplete="off"
             className="flex-1"
             id="message-input"
             placeholder="Type a message"

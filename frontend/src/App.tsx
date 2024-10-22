@@ -78,11 +78,9 @@ function App() {
 
   return (
     <Router>
-    
-
       <Routes>
        <Route path="/" element={<Main />} />
-        <Route path="/document-management" element={<DocumentManagement />} />
+        <Route path="/document-management" element={<DocumentManagement token={token}/>} />
         <Route path="/patient-records" element={<PatientRecords />} />
         <Route path="/patient-management" element={<PatientManagement />} />
       </Routes>

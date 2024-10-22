@@ -113,14 +113,12 @@ question_extractor_prompt = ChatPromptTemplate.from_template(
 )
 
 question_validator_prompt = ChatPromptTemplate.from_template(
-    """You are a question validator. Your task is to review the extracted questions and ensure there are no duplicates or similar questions.
-    If you find any duplicates or very similar questions, remove them and keep only the best formulated one.
-
-    Extracted Questions:
-    {questions}
-
+    """You are a question validator and editor. Your task is to review the extracted questions and ensure there are no duplicates or similar questions. If you find any duplicates or very similar questions, remove them and keep only the best-formulated one. We define duplicates as questions that are semantically the same and have the same options, if any.
+    
+    Extracted Questions: {questions}
+    
     Provide the validated list of questions as a JSON array, maintaining the same structure as the input.
-
+    
     Response:"""
 )
 

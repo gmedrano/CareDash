@@ -88,5 +88,4 @@ if __name__ == '__main__':
     folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'combined_forms', 'temp'))
     print('****file****', folder)
     documents = read_files_in_folder(folder)
-    #print(documents)
     chunk_and_upload(documents)

@@ -1,5 +1,5 @@
 import os
-import asyncio
+import json
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_openai import ChatOpenAI
@@ -17,7 +17,7 @@ mongo_client = MongoClient(os.getenv("MONGO_URI"))
 db = mongo_client[os.getenv("MONGO_DB")]    
 collection = db.questions
 
-questions = collection.find_one()
+questions = collection.find_one({"filename": "ACTC-Patient-Packet.pdf"})
 
 memory = MemorySaver()
 
