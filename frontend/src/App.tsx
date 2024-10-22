@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { sessionState, useChatSession } from "@chainlit/react-client";
 import { Chat } from "./components/Chat";
 import { Login } from "./components/Login";
@@ -63,13 +63,13 @@ function App() {
           <Login onLogin={handleLogin} />
         ) : (<>
           <Chat token={token} onLogout={handleLogout} />
-          <nav className="static-nav">
+          {/*<nav className="static-nav">
             <ul>
               <li><Link to="/document-management">Document Management</Link></li>
               <li><Link to="/patient-records">Patient Records</Link></li>
               <li><Link to="/patient-management">Patient Management</Link></li>
             </ul>
-          </nav></>
+          </nav>*/}</>
         )}
       </div>
       </>
