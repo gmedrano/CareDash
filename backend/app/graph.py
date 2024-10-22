@@ -28,8 +28,6 @@ graph.add_node("verification_tool_node", process_tool)
 graph.add_node("intake_agent", IntakeAgent(questions=questions))
 graph.add_node("rag_tool_node", RAGTool(retriever=retriever,
                llm=ChatOpenAI(model=os.environ["MODEL"])))
-#graph.add_node("medical_tool_node", MedicalToolAgent())
-#graph.add_node("call_assistance", call_assistance)
 
 graph.set_entry_point("supervisor_agent")
 
