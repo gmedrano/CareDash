@@ -5,10 +5,11 @@ import patientsIcon from '../../../public/images/patients-icon.svg';
 import docsIcon from '../../../public/images/docs-icon.svg';
 import archiveIcon from '../../../public/images/archive-icon.svg';
 import editIcon from '../../../public/images/edit-icon.svg';
-import Upload from '../Upload';
+//import Upload from '../Upload';
 
 
 export default function DocumentManagement({token}: {token: string}) {
+    console.log(token)
     return (
         <>
             <div className="dashboard-container">
