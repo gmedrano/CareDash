@@ -19,7 +19,7 @@ export default function PatientRecords() {
             </div>
             <div className="user-info">
                 <img src={userAvatar} alt="User Avatar" className="avatar"/>
-                <span className="user-name">Tony Stark</span>
+                <span className="user-name">Tom Smith</span>
             </div>
         </div>
 
