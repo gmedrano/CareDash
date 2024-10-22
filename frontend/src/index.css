@@ -811,3 +811,46 @@ h6 {
 .conversation-bubble p {
   font-size: 20px;
 }
+
+.question {
+  margin: 10px 0;
+  font-family: inherit;
+}
+
+.conversation-bubble .option-btn {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: rgb(227, 239, 242);
+  border: 1px solid color(srgb 0.713 0.8683 0.92);
+  color: color(srgb 0.2559 0.4943 0.575);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.conversation-bubble .option-btn:hover {
+  background-color: rgb(216, 233, 237);
+  border: 1px solid color(srgb 0.4526 0.6567 0.73);
+  color: color(srgb 0.2255 0.468 0.55);
+}
+
+.conversation-bubble .option-btn.selected {
+  background-color: color(srgb 0.1023 0.5198 0.66);
+  color: white;
+  border: 1px solid color(srgb 0.1023 0.5198 0.66);
+}
+
+.conversation-bubble .submit-btn {
+  padding: 10px 20px;
+  background-color: #9a32e8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.conversation-bubble .submit-btn:hover {
+  background-color: #7a27b3;
+}
