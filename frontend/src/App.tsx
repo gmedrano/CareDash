@@ -63,7 +63,7 @@ function App() {
           <Login onLogin={handleLogin} />
         ) : (<>
           <Chat token={token} onLogout={handleLogout} />
-          <nav>
+          <nav className="static-nav">
             <ul>
               <li><Link to="/document-management">Document Management</Link></li>
               <li><Link to="/patient-records">Patient Records</Link></li>
