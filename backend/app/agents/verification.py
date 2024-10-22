@@ -79,7 +79,8 @@ def process_tool(state):
         elif tool_call["name"] == "completed":
             state["next"]+=1
             print("COMPLETED!!!!!", state["next"])
-            messages.append(ToolMessage(name=tool_call["name"], tool_call_id=tool_call["id"],  content="Verification complete. Prompt the user that we are moving on to medical questions. Do not end with a farwell. Mention that during the next stage the patient can ask any questions they have."))
+            content = tools_by_name[tool_call["name"]].invoke({})
+            messages.append(ToolMessage(name=tool_call["name"], tool_call_id=tool_call["id"],  content=content))
         else:
             messages.append(ToolMessage(name=tool_call["name"], tool_call_id=tool_call["id"],  content=""))
     return {**state, "messages": messages}

@@ -1,79 +1,61 @@
-import os
-import json
-from dotenv import load_dotenv
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_openai import ChatOpenAI
+import requests
+import urllib.parse
+import xml.etree.ElementTree as ET
 from langchain_core.tools import tool
-from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
-from langgraph.graph import END
-from .prompt import SYSTEM_PROMPT, CONTEXT_PROMPT, QUESTION_PROMPT
-load_dotenv()
-MODEL = os.getenv("MODEL")
+from langchain_core.messages import ToolMessage
+
+
+def sentence_to_query_params(sentence):
+    # Convert sentence to URL query parameters
+    query_params = urllib.parse.urlencode({'q': sentence})
+    return query_params.replace('q=', '')
+
+
+def extract_first_document(xml_string):
+    """
+    Extract the first document from NLM search results XML.
+
+    Args:
+        xml_string (str): The XML string containing the search results
+
+    Returns:
+        dict: A dictionary containing the first document's information
+    """
+    # Parse the XML string
+    root = ET.fromstring(xml_string)
+
+    # Find the first document element
+    first_doc = root.find('.//document[@rank="1"]')
+
+    if first_doc is None:
+        return None
+
+    # Extract document information
+    doc_info = {
+        'url': first_doc.get('url'),
+        'title': first_doc.find('.//content[@name="title"]').text,
+        'organization': first_doc.find('.//content[@name="organizationName"]').text,
+        'summary': first_doc.find('.//content[@name="FullSummary"]').text
+    }
+
+    # Try to get alternative titles if they exist
+    alt_titles = first_doc.findall('.//content[@name="altTitle"]')
+    if alt_titles:
+        doc_info['alternative_titles'] = [title.text for title in alt_titles]
+
+    return doc_info
 
 
 @tool
-def user_query(query: str):
-    """\
-        The 'user_query' tool is designed to handle all non-medical questions a user might have. It retrieves relevant information about administrative, insurance, customer service, and consent-related queries. This tool focuses on addressing general inquiries that help users navigate the administrative side of healthcare, including:
+def medical_query(query):
+    '''The 'medical_query' tool is designed to handle questions related to medical terms, basic medicine information, and general health concepts. This tool focuses on providing factual information, definitions, or explanations related to medical terminology or common medications, without offering medical advice or treatment recommendations. It can be used for:
 
-        - Insurance inquiries (e.g., coverage, billing, financial responsibility)
-        - Customer service contact details (e.g., phone numbers, email addresses)
-        - Information about forms and consent documents (e.g., types of forms to sign, purposes, requirements)
-        - General administrative questions (e.g., appointment scheduling policies, office hours, telemedicine protocols)
-    """
-    return query
-
-
-@tool
-def completed(**kwargs):
-    """
-    Call this tool when all medical questions have been completed.
-    """
-    return True
-
-
-tools_by_name = {
-    "user_query": user_query,
-    "completed": completed
-}
-
-
-def medical_route(state):
-    if not state["messages"]:
-        return END
-    last_message = state["messages"][-1]
-    if last_message.tool_calls:
-        return "rag_tool_node"
-    else:
-        return END
-
-
-class MedicalQuestionAgent:
-    def __init__(self, questions=[]):
-        self.prompt = ChatPromptTemplate.from_messages([
-            ("system", SYSTEM_PROMPT),
-            ("system", QUESTION_PROMPT),
-            ('system', CONTEXT_PROMPT),
-            MessagesPlaceholder(variable_name="messages")
-        ])
-        self.llm = ChatOpenAI(model=MODEL, temperature=0, streaming=True)
-        self.chain = self.prompt | self.llm.bind_tools([user_query, completed])
-        self.questions = json.dumps([{**q, "id":'q'+str(i)}    for i, q in enumerate(split_questions(questions['questions']))])
-
-    def __call__(self, state):
-       
-        response = self.chain.invoke({**state, "questions": self.questions})
-        return {**state, "messages": [response]}
-
-def split_questions(questions:list[dict])->list[dict]:
-    num_options = 10
-    output = []
-    for question in questions:
-        if len(question.get('options', [])) >= 2*num_options:
-            for i in range(0, len(question['options']), num_options):
-                _question = question.copy()
-                _question['options'] = question['options'][i:i+num_options]
-                output.append(_question)
-        else:
-           output.append(question)
-    return output
+    Definitions of medical terms (e.g., conditions, procedures, symptoms)
+    General information about medications (e.g., drug names, uses, side effects)
+    Basic health concepts (e.g., what a specific medical condition entails)
+    Clarifications of medical jargon or abbreviations
+    '''
+    query_params = sentence_to_query_params(query)
+    url = f'https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term={query_params}'
+    response = requests.get(url)
+    return extract_first_document(response.text)

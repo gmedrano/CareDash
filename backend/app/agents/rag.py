@@ -1,7 +1,7 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 from langchain_openai import ChatOpenAI
-from .medical import tools_by_name
+from .intake import tools_by_name
 
 SYSTEM_PROMPT = """\
 You are an expert in answering questions succintly and correctly only within context and chat history. Answer user's last question on the chat history and look at the message history for further context if needed. If you are not able to answer the last question of user based on the context reply with "I don't know". Never make up an answer.
@@ -40,14 +40,20 @@ class RAGTool:
         messages = []
         for tool_call in last_message.tool_calls:
             print('TOOL CALL**********************',
-                  tools_by_name[tool_call["name"]],  tools_by_name[tool_call["name"]].invoke({**tool_call["args"]}))
+                  tools_by_name[tool_call["name"]],  tool_call["args"])
             if tool_call["name"] == "user_query":
                 query = tools_by_name[tool_call["name"]].invoke(
                     {**tool_call["args"]})
                 response = self.retriever.invoke(query)
                 print('RESPONSE**********************', response)
                 messages.append(ToolMessage(name=tool_call["name"], tool_call_id=tool_call["id"],
-                                            content=f"Context:\n{response}\n\nRemember to try to get back to asking the patient medical questions after the user has no further question."))
+                                          content=f"Context:\n{response}\n\nRemember to try to get back to asking the patient medical questions after the user has no further question."))
+            elif tool_call["name"] == "medical_query":
+                content = tools_by_name[tool_call["name"]].invoke(
+                    {**tool_call["args"]})
+                
+                print('MEDICAL CONTENT**********************', content)
+                messages.append(ToolMessage(name=tool_call["name"], tool_call_id=tool_call["id"], content=f"Context:\n{content}\n\nRemember to try to get back to asking the patient medical questions after the user has no further question."))
             elif tool_call["name"] == "completed":
                 state["next"] += 1
                 print("COMPLETED!!!!!", state["next"])

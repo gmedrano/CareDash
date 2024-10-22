@@ -177,7 +177,7 @@ export default function DocumentManagement({token}: {token: string}) {
 
             
             <dialog className="modal" open>
-            <Upload token={token}/>
+            {/*<Upload token={token}/>*/}
                 <form method="dialog" className="upload-form">
                     <h2>Upload Document</h2>
                     <input type="file" name="document" />

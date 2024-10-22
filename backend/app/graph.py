@@ -1,16 +1,14 @@
 import os
-import json
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_openai import ChatOpenAI
 from pymongo.mongo_client import MongoClient
 from .agents.supervisor import SupervisorAgent
 from .agents.verification import VerificationAgent, process_tool, verification_route
-from .agents.medical import MedicalQuestionAgent, medical_route
+from .agents.intake import IntakeAgent, intake_route
 from .agents.rag import RAGTool
 from .agents.state.state import GraphState
 from .agents.data.vectorstore.get import retriever
-
 
 #find question in the db
 mongo_client = MongoClient(os.getenv("MONGO_URI"))
@@ -27,15 +25,17 @@ supervisor = SupervisorAgent()
 graph.add_node("supervisor_agent", supervisor)
 graph.add_node("verification_agent", VerificationAgent())
 graph.add_node("verification_tool_node", process_tool)
-graph.add_node("medical_agent", MedicalQuestionAgent(questions=questions))
+graph.add_node("intake_agent", IntakeAgent(questions=questions))
 graph.add_node("rag_tool_node", RAGTool(retriever=retriever,
                llm=ChatOpenAI(model=os.environ["MODEL"])))
+#graph.add_node("medical_tool_node", MedicalToolAgent())
 #graph.add_node("call_assistance", call_assistance)
 
 graph.set_entry_point("supervisor_agent")
 
 graph.add_edge("verification_tool_node", "verification_agent")
-graph.add_edge("rag_tool_node", "medical_agent")
+graph.add_edge("rag_tool_node", "intake_agent")
+
 graph.add_conditional_edges(
     'supervisor_agent',
      supervisor.route
@@ -46,8 +46,8 @@ graph.add_conditional_edges(
     {"__end__": END, "verification_tool_node": "verification_tool_node"}
 )
 graph.add_conditional_edges(
-    "medical_agent",
-    medical_route,
+    "intake_agent",
+    intake_route,
     {"__end__": END, "rag_tool_node": "rag_tool_node"}
 )
 

@@ -1,7 +1,7 @@
 from langgraph.graph import END
 class SupervisorAgent:
     def __init__(self):
-        self.order = ['verification_agent', 'medical_agent']
+        self.order = ['verification_agent', 'intake_agent']
         self.next = 0
     
     def __call__(self, state):
