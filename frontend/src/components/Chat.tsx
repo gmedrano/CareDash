@@ -86,7 +86,7 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
     }
     return (
       <div key={message.id} className="flex items-start space-x-2">
-        <div className="w-20 text-sm text-green-500">{message.name}</div>
+        <div className="w-20 text-sm user-label">{message.name}</div>
         <div className="flex-1 border rounded-lg p-2">
           <p className="text-black dark:text-white">{outputMessage} {content}</p>
           <small className="text-xs text-gray-500">{date}</small>
@@ -153,7 +153,7 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
             <div className="view-content">
             <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
      
-      <div className="flex-1 overflow-auto p-6">
+      <div className="flex-1 overflow-auto chatbot-viewport">
         <div className="space-y-4">
           {messages.map((message) => renderMessage(message))}
         </div>
@@ -162,7 +162,6 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
         <div className="flex items-center space-x-2">
           <Input
             autoFocus
-            autoComplete="off"
             className="flex-1"
             id="message-input"
             placeholder="Type a message"

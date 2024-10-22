@@ -308,7 +308,7 @@ h6 {
 /* View Content */
 .view-content {
   background-color: #ffffff;
-  padding: 40px 60px;
+  padding: 0;
 }
 
 /* Responsive Design */
@@ -788,4 +788,14 @@ h6 {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Chatbot styling */
+
+.chatbot-viewport {
+  padding: 4rem;
+}
+
+.user-label {
+  color: blue;
 }
