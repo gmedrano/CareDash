@@ -14,6 +14,7 @@ import userAvatar from '../../public/images/user-avatar.png';
 import dashboardIcon from '../../public/images/dashboard-icon.svg';
 import patientsIcon from '../../public/images/patients-icon.svg';
 import docsIcon from '../../public/images/docs-icon.svg';
+import caredashIconPurple from '../../public/images/caredash-icon-purple.svg';
 
 function extractJSON(message: string) {
   try {
@@ -154,6 +155,10 @@ export function Chat({ token, onLogout }: { token: string, onLogout: () => void 
             <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col" style={{ overflowY:"auto"}}>
 
               <div className="flex-1 overflow-auto chatbot-viewport">
+                <div className="chatbot-header">
+                  <img src={caredashIconPurple} alt="" />
+                  <h4>Medical Intake Assistant</h4>
+                </div>
                 <div className="space-y-4">
                   {messages.map((message) => renderMessage(message))}
                 </div>

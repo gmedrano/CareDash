@@ -932,3 +932,19 @@ h6 {
 .large-button:hover {
   background-color: #7a27b3 !important;
 }
+
+.chatbot-header {
+  text-align: center;
+  padding-bottom: 1.5rem;
+}
+
+.chatbot-header img {
+  width: 3rem;
+  margin: 0 50% 10px 49%;
+}
+
+.chatbot-header h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: color(srgb 0.4562 0.3094 0.7795);
+}
