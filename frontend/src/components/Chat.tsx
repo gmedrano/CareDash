@@ -150,7 +150,7 @@ export function Chat({token, onLogout}: {token: string, onLogout: () => void}) {
                 </ul>
             </nav>
 
-            <div className="view-content">
+            <div className="view-content-chat">
             <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col">
      
       <div className="flex-1 overflow-auto chatbot-viewport">

@@ -260,7 +260,7 @@ h6 {
 
 /* Navigation Panel */
 .nav-panel {
-  background-color: #8356e4;
+  background-color: color(srgb 0.4556 0.3081 0.78);
   /* padding: 20px; */
 }
 
@@ -307,6 +307,11 @@ h6 {
 
 /* View Content */
 .view-content {
+  background-color: #ffffff;
+  padding: 3rem;
+}
+
+.view-content-chat {
   background-color: #ffffff;
   padding: 0;
 }
@@ -378,7 +383,7 @@ h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 0 10px 0;
+  margin: 0 0 10px 0;
 }
 
 .page-header h2 {
