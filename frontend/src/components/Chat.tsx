@@ -14,6 +14,7 @@ import userAvatar from '../../public/images/user-avatar.png';
 import dashboardIcon from '../../public/images/dashboard-icon.svg';
 import patientsIcon from '../../public/images/patients-icon.svg';
 import docsIcon from '../../public/images/docs-icon.svg';
+import settingsIcon from '../../public/images/settings-icon.svg';
 import caredashIconPurple from '../../public/images/caredash-icon-purple.svg';
 
 function extractJSON(message: string) {
@@ -129,7 +130,7 @@ export function Chat({ token, onLogout }: { token: string, onLogout: () => void 
                   <i className="nav-icon">
                     <img src={patientsIcon} alt="Patients Icon" />
                   </i>
-                  Patient Records
+                  My Records
                 </a>
               </li>
               <li>
@@ -137,13 +138,13 @@ export function Chat({ token, onLogout }: { token: string, onLogout: () => void 
                   <i className="nav-icon">
                     <img src={docsIcon} alt="Docs Icon" />
                   </i>
-                  Document Management
+                  Intake Assistant
                 </a>
               </li>
               <li>
                 <a href="#">
                   <i className="nav-icon">
-                    <img src={docsIcon} alt="Docs Icon" />
+                    <img src={settingsIcon} alt="Settings Icon" />
                   </i>
                   Settings
                 </a>
