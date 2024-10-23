@@ -1,5 +1,5 @@
 import caredashLogoWhite from '../../../public/images/caredash-logo-white.svg';
-import userAvatar from '../../../public/images/user-avatar.png';
+import doctorAvatar from '../../../public/images/doctor-avatar.png';
 import dashboardIcon from '../../../public/images/dashboard-icon.svg';
 import patientsIcon from '../../../public/images/patients-icon.svg';
 import docsIcon from '../../../public/images/docs-icon.svg';
@@ -21,8 +21,8 @@ export default function DocumentManagement({token}: {token: string}) {
                         <img src={caredashLogoWhite} alt="CareDash Logo" />
                     </div>
                     <div className="user-info">
-                        <img src={userAvatar} alt="User Avatar" className="avatar" />
-                        <span className="user-name">Tom Smith</span>
+                        <img src={doctorAvatar} alt="Doctor Avatar" className="avatar" />
+                        <span className="user-name">Dr. Sophia Miller</span>
                     </div>
                 </div>
 
