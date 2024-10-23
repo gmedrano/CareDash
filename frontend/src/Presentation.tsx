@@ -57,15 +57,15 @@ const Presentation = () => {
     setToken('');
     localStorage.removeItem('token');
   };
-  
+  handleLogout
   // Array of page components
   const pages = [
     <Login onLogin={handleLogin} />,
     <DocumentManagement token={token} />,
-    <Chat token={token} onLogout={handleLogout} />,
     <PatientRecords />,
     <PatientManagement />,
-    <PatientRecords />
+    <PatientRecords />,
+    <Chat token={token} onLogout={handleLogout} />
   ];
 
   const goToNextPage = () => {

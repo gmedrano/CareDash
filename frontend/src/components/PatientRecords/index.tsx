@@ -87,8 +87,8 @@ export default function PatientRecords() {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>John</td>
-                                <td>Doe</td>
+                                <td>Tom</td>
+                                <td>Smith</td>
                                 <td>2023-09-25</td>
                                 <td>Sample comment</td>
                                 <td className="actions">
@@ -117,7 +117,7 @@ export default function PatientRecords() {
                             </tr>
 
                             <tr>
-                                <td>John</td>
+                                <td>Jane</td>
                                 <td>Doe</td>
                                 <td>2023-09-25</td>
                                 <td>Sample comment</td>
@@ -132,8 +132,8 @@ export default function PatientRecords() {
                             </tr>
 
                             <tr>
-                                <td>John</td>
-                                <td>Doe</td>
+                                <td>Tony</td>
+                                <td>Peter</td>
                                 <td>2023-09-25</td>
                                 <td>Sample comment</td>
                                 <td className="actions">
@@ -147,8 +147,8 @@ export default function PatientRecords() {
                             </tr>
 
                             <tr>
-                                <td>John</td>
-                                <td>Doe</td>
+                                <td>Stark</td>
+                                <td>Parker</td>
                                 <td>2023-09-25</td>
                                 <td>Sample comment</td>
                                 <td className="actions">

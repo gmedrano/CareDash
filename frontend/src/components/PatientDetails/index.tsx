@@ -60,7 +60,7 @@ export default function PatientDetails() {
             <div className="view-content">
                 <div className="documents-management">
                     <div className="page-header">
-                        <h2>Medical Records for John Doe</h2>
+                        <h2>Medical Records for Tom Smith</h2>
                     </div>
                     <div className="important-fields">
                         <div className="field-group">

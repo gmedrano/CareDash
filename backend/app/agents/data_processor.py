@@ -104,7 +104,7 @@ question_extractor_prompt = ChatPromptTemplate.from_template(
         "unit": "unit_of_measurement",  // For NUMERIC_INPUT
         "format": "date_format",  // For DATE_INPUT
         "labels": {{"min": "Min label", "max": "Max label"}},  // For SLIDER, LIKERT_SCALE
-        "required": true/false
+        "required": true // Whether the question is required to be answered. Make all of them true in this case even multi-select
     }}
 
     Provide the extracted questions as a JSON array.
