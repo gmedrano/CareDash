@@ -99,9 +99,9 @@ export default function DocumentManagement({token}: {token: string}) {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Document 1</td>
-                                        <td>2023-09-25</td>
-                                        <td>Sample comment</td>
+                                        <td>Clinic Policy: Patient Privacy Policy</td>
+                                        <td>10/05/2024</td>
+                                        <td>Standard HIPAA compliance document for all new patients.</td>
                                         <td className="actions">
                                             <a href="#" className="archive-icon">
                                                 <img src={archiveIcon} alt="Archive" />
@@ -113,9 +113,9 @@ export default function DocumentManagement({token}: {token: string}) {
                                     </tr>
 
                                     <tr>
-                                        <td>Document 1</td>
-                                        <td>2023-09-25</td>
-                                        <td>Sample comment</td>
+                                        <td>Medical History Intake Form</td>
+                                        <td>10/06/2024</td>
+                                        <td>Updated form includes additional questions on family history.</td>
                                         <td className="actions">
                                             <a href="#" className="archive-icon">
                                                 <img src={archiveIcon} alt="Archive" />
@@ -127,9 +127,9 @@ export default function DocumentManagement({token}: {token: string}) {
                                     </tr>
 
                                     <tr>
-                                        <td>Document 1</td>
-                                        <td>2023-09-25</td>
-                                        <td>Sample comment</td>
+                                        <td>COVID-19 Vaccination Consent Form</td>
+                                        <td>10/02/2024</td>
+                                        <td>Required for patients receiving the COVID-19 vaccine.</td>
                                         <td className="actions">
                                             <a href="#" className="archive-icon">
                                                 <img src={archiveIcon} alt="Archive" />
@@ -141,9 +141,9 @@ export default function DocumentManagement({token}: {token: string}) {
                                     </tr>
 
                                     <tr>
-                                        <td>Document 1</td>
-                                        <td>2023-09-25</td>
-                                        <td>Sample comment</td>
+                                        <td>HIPAA Authorization Form</td>
+                                        <td>10/01/2024</td>
+                                        <td>Patients must sign to authorize data sharing with specialists.</td>
                                         <td className="actions">
                                             <a href="#" className="archive-icon">
                                                 <img src={archiveIcon} alt="Archive" />
@@ -155,9 +155,9 @@ export default function DocumentManagement({token}: {token: string}) {
                                     </tr>
 
                                     <tr>
-                                        <td>Document 1</td>
-                                        <td>2023-09-25</td>
-                                        <td>Sample comment</td>
+                                        <td>Clinic Financial Policy</td>
+                                        <td>10/03/2024</td>
+                                        <td>Updated with new payment terms as of October 2024.</td>
                                         <td className="actions">
                                             <a href="#" className="archive-icon">
                                                 <img src={archiveIcon} alt="Archive" />
