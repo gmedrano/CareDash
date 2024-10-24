@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { sessionState, useChatSession } from "@chainlit/react-client";
-import { Chat } from "./components/Chat";
-import { Login } from "./components/Login";
+//import { Login } from "./components/Login";
 import DocumentManagement from './components/DocumentManagement';
-import PatientRecords from './components/PatientRecords';
-import PatientManagement from './components/PatientDetails';
+//import PatientRecords from './components/PatientRecords';
+import PatientDetails from './components/PatientDetails';
 import { useRecoilValue } from "recoil";
 
 const userEnv = {};
@@ -45,12 +44,12 @@ const Presentation = () => {
     }
   }, []);
 
-  const handleLogin = (newToken: string) => {
+  /*const handleLogin = (newToken: string) => {
     setIsLoggedIn(true);
     setToken(newToken);
     console.log('NEW TOKEN', newToken)
     localStorage.setItem('token', newToken);
-  };
+  };*/
   
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -60,12 +59,9 @@ const Presentation = () => {
   handleLogout
   // Array of page components
   const pages = [
-    <Login onLogin={handleLogin} />,
+    <PatientDetails />,
     <DocumentManagement token={token} />,
-    <PatientRecords />,
-    <PatientManagement />,
-    <PatientRecords />,
-    <Chat token={token} onLogout={handleLogout} />
+    //<Login onLogin={handleLogin} />
   ];
 
   const goToNextPage = () => {

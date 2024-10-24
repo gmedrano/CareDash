@@ -3,6 +3,7 @@ import userAvatar from '../../../public/images/user-avatar.png';
 import dashboardIcon from '../../../public/images/dashboard-icon.svg';
 import patientsIcon from '../../../public/images/patients-icon.svg';
 import docsIcon from '../../../public/images/docs-icon.svg';
+import settingsIcon from '../../../public/images/settings-icon.svg';
 
 export default function PatientDetails() {
     return (
@@ -23,38 +24,38 @@ export default function PatientDetails() {
    
             <nav className="nav-panel">
                 <ul>
-                    <li>
-                        <a href="#">
-                            <i className="nav-icon">
-                                <img src={dashboardIcon} alt="Docs Icon"/>
-                            </i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="active">
-                            <i className="nav-icon">
-                                <img src={patientsIcon} alt="Patients Icon"/>
-                            </i>
-                            Patient Records
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className="nav-icon">
-                                <img src={docsIcon} alt="Docs Icon"/>
-                            </i>
-                            Document Management
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className="nav-icon">
-                                <img src={docsIcon} alt="Docs Icon"/>
-                            </i>
-                            Settings
-                        </a>
-                    </li>
+                <li>
+                <a href="#">
+                  <i className="nav-icon">
+                    <img src={dashboardIcon} alt="Dashboard Icon" />
+                  </i>
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="#" className="active">
+                  <i className="nav-icon">
+                    <img src={patientsIcon} alt="Patients Icon" />
+                  </i>
+                  My Records
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i className="nav-icon">
+                    <img src={docsIcon} alt="Docs Icon" />
+                  </i>
+                  Intake Assistant
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i className="nav-icon">
+                    <img src={settingsIcon} alt="Settings Icon" />
+                  </i>
+                  Settings
+                </a>
+              </li>
                 </ul>
             </nav>
             <div className="view-content">
@@ -91,33 +92,33 @@ export default function PatientDetails() {
                         <div className="form-row">
                             <div className="form-group">
                             <label htmlFor="first-name">First Name</label>
-                            <input type="text" id="first-name" name="first-name" />
+                            <input type="text" id="first-name" name="first-name" defaultValue={"Tom"} />
                             </div>
                             <div className="form-group">
                             <label htmlFor="last-name">Last Name</label>
-                            <input type="text" id="last-name" name="last-name" />
+                            <input type="text" id="last-name" name="last-name" defaultValue={"Smith"} />
                             </div>
                         </div>
                         <div className="form-row">
                             <div className="form-group">
                             <label htmlFor="date-of-birth">Date of Birth</label>
-                            <input type="date" id="date-of-birth" name="date-of-birth" />
+                            <input type="date" id="date-of-birth" name="date-of-birth" value={"1990-01-01"} />
                             </div>
                             <div className="form-group">
                             <label htmlFor="date-added">Date Added</label>
-                            <input type="date" id="date-added" name="date-added" />
+                            <input type="date" id="date-added" name="date-added" value={"2024-10-24"} />
                             </div>
                         </div>
                         <div className="form-row">
                             <div className="form-group">
                             <label htmlFor="address">Address</label>
-                            <input type="text" id="address" name="address" />
+                            <input type="text" id="address" name="address" defaultValue={"123 Main St, Anytown, USA"} />
                             </div>
                             <div className="form-group">
                             <label htmlFor="status">Status</label>
                             <select id="status" name="status">
                                 <option value="not-started">Not Started</option>
-                                <option value="intake-completed">Intake Completed</option>
+                                <option value="intake-completed" selected>Intake Completed</option>
                                 <option value="patient-verified">Patient Verified</option>
                             </select>
                             </div>
@@ -125,7 +126,8 @@ export default function PatientDetails() {
                         </form>
                     </div>
                     <div className="medical-history">
-                        <h2>Medical History</h2>
+                        <h2>Intake Data Overview</h2>
+                        <h3>Thursday, October 24, 2024</h3>
                         <div className="medical-grid">
                         <div className="medical-column">
                             <div className="medical-field">

@@ -90,8 +90,8 @@ type Question =
 type Answer = string | string[] | number | { [key: string]: string | number };
 
 // Helper component for submit button
-const SubmitButton: React.FC<{ onSubmit: () => void }> = ({ onSubmit }) => (
-  <button className="submit-btn" onClick={onSubmit}>
+const SubmitButton: React.FC<{ onSubmit: () => void, style?: React.CSSProperties }> = ({ onSubmit, style }) => (
+  <button className="submit-btn" onClick={onSubmit} style={style}>
     Submit
   </button>
 );
@@ -99,7 +99,7 @@ const SubmitButton: React.FC<{ onSubmit: () => void }> = ({ onSubmit }) => (
 // Question components
 const MultiSelect: React.FC<{ question: MultiSelectQuestion; onAnswer: (id: string, answer: string[]) => void }> = ({ question, onAnswer }) => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-
+  const [displaySubmit, setDisplaySubmit] = useState(true);
   const handleSelect = (option: string) => {
     setSelectedOptions(prev => 
       prev.includes(option) ? prev.filter(item => item !== option) : [...prev, option]
@@ -108,6 +108,7 @@ const MultiSelect: React.FC<{ question: MultiSelectQuestion; onAnswer: (id: stri
 
   const handleSubmit = () => {
     onAnswer(question.id, selectedOptions);
+    setDisplaySubmit(false);
   };
   const options = [...question.options, "None of the above"]
   return (
@@ -118,18 +119,20 @@ const MultiSelect: React.FC<{ question: MultiSelectQuestion; onAnswer: (id: stri
             key={index}
             className={`option-btn ${selectedOptions.includes(option) ? 'selected' : ''}`}
             onClick={() => handleSelect(option)}
+            disabled={displaySubmit==false}
           >
             {option}
           </button>
         ))}
       </div>
-      <SubmitButton onSubmit={handleSubmit} />
+      <SubmitButton onSubmit={handleSubmit} style={{display: displaySubmit ? 'block' : 'none'}} />
     </div>
   );
 };
 
 const SingleSelect: React.FC<{ question: SingleSelectQuestion; onAnswer: (id: string, answer: string) => void }> = ({ question, onAnswer }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [displaySubmit, setDisplaySubmit] = useState(true);
 
   const handleSelect = (option: string) => {
     setSelectedOption(option);
@@ -138,6 +141,7 @@ const SingleSelect: React.FC<{ question: SingleSelectQuestion; onAnswer: (id: st
   const handleSubmit = () => {
     if (selectedOption) {
       onAnswer(question.id, selectedOption);
+      setDisplaySubmit(false);
     }
   };
 
@@ -149,12 +153,13 @@ const SingleSelect: React.FC<{ question: SingleSelectQuestion; onAnswer: (id: st
             key={index}
             className={`option-btn ${selectedOption === option ? 'selected' : ''}`}
             onClick={() => handleSelect(option)}
+            disabled={displaySubmit==false}
           >
             {option}
           </button>
         ))}
       </div>
-      <SubmitButton onSubmit={handleSubmit} />
+      <SubmitButton onSubmit={handleSubmit} style={{display: displaySubmit ? 'block' : 'none'}} />
     </div>
   );
 };
