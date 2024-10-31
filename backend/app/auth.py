@@ -35,6 +35,8 @@ def init_db():
     # Add sample users if they don't exist
     cur.execute("INSERT OR IGNORE INTO users VALUES (?, ?)", 
                 ("admin", pwd_context.hash("admin")))
+    cur.execute("INSERT OR IGNORE INTO users VALUES (?, ?)", 
+                ("tomsmith", pwd_context.hash("tomsmith")))
 
     
     conn.commit()

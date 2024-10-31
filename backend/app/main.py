@@ -93,6 +93,7 @@ async def clear_memory(obj: dict, current_user: dict = Depends(get_current_user)
     messages = state.values.get("messages", [])
     for message in messages:
         workflow.update_state(config, {"messages": RemoveMessage(id=message.id)})
+    workflow.update_state(config, {"counter": 0, "current_field": None, "messages": []})
     return JSONResponse(content={"status": "success"})
 
 app.mount("/assets", StaticFiles(directory=os.path.join(frontend_dir, "assets")), name="static")

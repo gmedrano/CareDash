@@ -51,14 +51,14 @@ def intake_route(state):
 
 
 class IntakeAgent:
-    def __init__(self, questions=[]):
+    def __init__(self, llm: ChatOpenAI, questions=[]):
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", SYSTEM_PROMPT),
             ("system", QUESTION_PROMPT),
             ('system', CONTEXT_PROMPT),
             MessagesPlaceholder(variable_name="messages")
         ])
-        self.llm = ChatOpenAI(model=MODEL, temperature=0, streaming=True)
+        self.llm = llm
         self.chain = self.prompt | self.llm.bind_tools([user_query, completed, medical_query])
         self.questions = json.dumps([{**q, "id":'q'+str(i+1)} for i, q in enumerate(split_questions(questions['questions']))])
 

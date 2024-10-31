@@ -1,14 +1,17 @@
 import os
+import asyncio
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_openai import ChatOpenAI
 from pymongo.mongo_client import MongoClient
-from .agents.supervisor import SupervisorAgent
+from .agents.supervisor import SupervisorAgent, EndNode
 from .agents.verification import VerificationAgent, process_tool, verification_route
 from .agents.intake import IntakeAgent, intake_route
 from .agents.rag import RAGTool
 from .agents.state.state import GraphState
 from .agents.data.vectorstore.get import retriever
+
+llm = ChatOpenAI(temperature=0, model=os.environ["MODEL"], streaming=True)
 
 #find question in the db
 mongo_client = MongoClient(os.getenv("MONGO_URI"))
@@ -17,22 +20,22 @@ collection = db.questions
 
 questions = collection.find_one({"filename": "ACTC-Patient-Packet.pdf"})
 
-memory = MemorySaver()
-
 graph = StateGraph(GraphState)
 
 supervisor = SupervisorAgent()
 graph.add_node("supervisor_agent", supervisor)
-graph.add_node("verification_agent", VerificationAgent())
+graph.add_node("verification_agent", VerificationAgent(llm=llm))
 graph.add_node("verification_tool_node", process_tool)
-graph.add_node("intake_agent", IntakeAgent(questions=questions))
+graph.add_node("intake_agent", IntakeAgent(llm=llm, questions=questions))
 graph.add_node("rag_tool_node", RAGTool(retriever=retriever,
-               llm=ChatOpenAI(model=os.environ["MODEL"])))
+               llm=llm))
+graph.add_node("end_node", EndNode(llm=llm))
 
 graph.set_entry_point("supervisor_agent")
 
 graph.add_edge("verification_tool_node", "verification_agent")
 graph.add_edge("rag_tool_node", "intake_agent")
+graph.add_edge("end_node", END)
 
 graph.add_conditional_edges(
     'supervisor_agent',
@@ -49,6 +52,7 @@ graph.add_conditional_edges(
     {"__end__": END, "rag_tool_node": "rag_tool_node"}
 )
 
+memory = MemorySaver()
 workflow = graph.compile(checkpointer=memory)
 
 async def run_verfication(app, fields="", values=""):
@@ -81,7 +85,7 @@ async def run(app):
         _user_input = input("User: ")
     
 
-#if __name__ == "__main__":
-    #app = graph.compile(checkpointer=memory)
-    #asyncio.run(run(app))
+if __name__ == "__main__":
+    app = graph.compile(checkpointer=memory)
+    asyncio.run(run(app))
 

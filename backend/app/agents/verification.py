@@ -39,9 +39,11 @@ def verification_route(state):
         return "verification_tool_node"
     else:
         return END
+    
+    
 
 class VerificationAgent:
-    def __init__(self):
+    def __init__(self, llm: ChatOpenAI):
         self.prompt = ChatPromptTemplate.from_messages([
             ("system", SYSTEM_PROMPT),
             ("system", VERIFICATION_PROMPT),
@@ -49,16 +51,17 @@ class VerificationAgent:
             ("system", "Values:{values}"),
             MessagesPlaceholder(variable_name="messages")
         ])
-        self.llm = ChatOpenAI(model=MODEL, temperature=0, streaming=True)
+        self.llm = llm
         self.chain = self.prompt | self.llm.bind_tools([invalid, completed])
         
     def __call__(self, state):
         result = self.chain.invoke(state)
         return {**state, "messages": [result]}
     
+    
 def process_tool(state): 
     last_message = state["messages"][-1]
-    print('COUNTER**********', state["counter"])
+    print('COUNTER=', state["counter"], 'CURRENT FIELD=', state.get("current_field"))
     messages = []
     for tool_call in last_message.tool_calls:
 
@@ -78,7 +81,7 @@ def process_tool(state):
             messages.append(ToolMessage(name=tool_call["name"], tool_call_id=tool_call["id"],  content=message))
         elif tool_call["name"] == "completed":
             state["next"]+=1
-            print("COMPLETED!!!!!", state["next"])
+            print("COMPLETED! next=", state["next"])
             content = tools_by_name[tool_call["name"]].invoke({})
             messages.append(ToolMessage(name=tool_call["name"], tool_call_id=tool_call["id"],  content=content))
         else:

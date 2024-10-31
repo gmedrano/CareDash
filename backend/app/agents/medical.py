@@ -2,7 +2,6 @@ import requests
 import urllib.parse
 import xml.etree.ElementTree as ET
 from langchain_core.tools import tool
-from langchain_core.messages import ToolMessage
 
 
 def sentence_to_query_params(sentence):
