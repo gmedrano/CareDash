@@ -66,3 +66,5 @@ coverage/
 .env.production.local
 
 .ipynb_checkpoints/
+
+.files/*
