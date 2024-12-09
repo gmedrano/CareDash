@@ -6,7 +6,6 @@ from pydantic import BaseModel
 from datetime import datetime, timedelta, timezone
 import sqlite3
 
-
 SECRET_KEY = "your-secret-key"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 300

@@ -8,7 +8,6 @@ import DocumentManagement from './components/DocumentManagement';
 import PatientRecords from './components/PatientRecords';
 import PatientManagement from './components/PatientDetails';
 
-
 const userEnv = {};
 
 function App() {
@@ -36,7 +35,6 @@ function App() {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    console.log('STORED', storedToken)
     if (storedToken) {
       setIsLoggedIn(true);
       setToken(storedToken);
@@ -46,7 +44,6 @@ function App() {
   const handleLogin = (newToken: string) => {
     setIsLoggedIn(true);
     setToken(newToken);
-    console.log('NEW TOKEN', newToken)
     localStorage.setItem('token', newToken);
   };
 
@@ -61,16 +58,9 @@ function App() {
         <div>
         {!isLoggedIn ? (
           <Login onLogin={handleLogin} />
-        ) : (<>
+        ) : 
           <Chat token={token} onLogout={handleLogout} />
-          {/*<nav className="static-nav">
-            <ul>
-              <li><Link to="/document-management">Document Management</Link></li>
-              <li><Link to="/patient-records">Patient Records</Link></li>
-              <li><Link to="/patient-management">Patient Management</Link></li>
-            </ul>
-          </nav>*/}</>
-        )}
+        }
       </div>
       </>
     )

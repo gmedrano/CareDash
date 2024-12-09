@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { login } from '../../api';
 import loginBg from '../../../public/images/login-bg.jpg';
 import logo from '../../../public/images/caredash-logo-purple.svg';
-
-
 interface LoginProps {
   onLogin: (token: string) => void;
 }

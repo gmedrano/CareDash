@@ -19,7 +19,6 @@ from .agents.data_processor import PDFProcessor
 from .auth import get_current_user, auth_router
 from .graph import workflow
 
-
 load_dotenv()
 
 mongo_client = MongoClient(os.getenv("MONGO_URI"))
@@ -69,6 +68,7 @@ async def upload_file(file: UploadFile = File(...)):
         collection = db.questions
         pdfloader = PDFProcessor(temp_file_path)
         questions = pdfloader.extract_questions()
+        #temporarily removed Qdrant store from above
         _question = collection.find_one({"filename": file.filename})
         print('questions=', questions)
         if _question:

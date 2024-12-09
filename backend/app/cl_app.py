@@ -1,8 +1,5 @@
-from langchain_core.messages import HumanMessage, RemoveMessage, AIMessageChunk
+from langchain_core.messages import HumanMessage,  AIMessageChunk
 import chainlit as cl
-from fastapi import Depends
-from langgraph.checkpoint.memory import MemorySaver
-from app.auth import get_current_user
 from app.graph import workflow
 from dotenv import load_dotenv
 
@@ -23,7 +20,6 @@ async def on_chat_start():
             await msg.stream_token(message.content)
     
     await msg.update()
-    #await cl.Message(content="Hi, how can I help you today?").send()
 
 
 @cl.on_message
