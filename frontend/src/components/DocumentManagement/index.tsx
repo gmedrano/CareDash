@@ -5,7 +5,7 @@ import patientsIcon from '../../../public/images/patients-icon.svg';
 import docsIcon from '../../../public/images/docs-icon.svg';
 import archiveIcon from '../../../public/images/archive-icon.svg';
 import editIcon from '../../../public/images/edit-icon.svg';
-//import Upload from '../Upload';
+import Upload from '../Upload';
 
 
 export default function DocumentManagement({token}: {token: string}) {
@@ -176,16 +176,17 @@ export default function DocumentManagement({token}: {token: string}) {
 
             <input type="checkbox" id="modal-toggle" className="modal-toggle" style={{ visibility: "hidden" }} />
 
-            
             <dialog className="modal" open>
-            {/*<Upload token={token}/>*/}
+        
                 <form method="dialog" className="upload-form">
                     <h2>Upload Document</h2>
-                    <input type="file" name="document" />
+                    {/*<input type="file" name="document" />*/}
                     <div className="modal-buttons">
-                        <button type="submit">Upload</button>
+                    <Upload token={token}/>
+                    
+                        {/*<button type="submit">Upload</button>
                         
-                        <label htmlFor="modal-toggle" className="close-button">Cancel</label>
+                        <label htmlFor="modal-toggle" className="close-button">Cancel</label>*/}
                     </div>
                 </form>
             </dialog>

@@ -68,7 +68,7 @@ async def upload_file(file: UploadFile = File(...)):
         collection = db.questions
         pdfloader = PDFProcessor(temp_file_path)
         questions = pdfloader.extract_questions()
-        #temporarily removed Qdrant store from above
+        pdfloader.extract_to_vectorstore()
         _question = collection.find_one({"filename": file.filename})
         print('questions=', questions)
         if _question:

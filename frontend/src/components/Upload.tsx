@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
+//import { Button } from "@/components/ui/button";
+//import { Input } from "@/components/ui/input";
 
 interface UploadProps {
   token: string;
@@ -66,10 +65,11 @@ const Upload: React.FC<UploadProps> = ({ token }) => {
 
   return (
     <div>
-        <Input type="file" onChange={handleFileChange} />
-        <Button onClick={handleUpload} disabled={uploading}>
+        <input type="file" onChange={handleFileChange} />
+        <button type="submit" onClick={handleUpload} disabled={uploading}>
           {uploading ? `Uploading... ${uploadProgress}%` : 'Upload'}
-        </Button>
+        </button>
+        <label htmlFor="modal-toggle" className="close-button" style={{"marginLeft":"5px"}}>Cancel</label>
         {uploading && (
           <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-2">
             <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${uploadProgress}%` }}></div>

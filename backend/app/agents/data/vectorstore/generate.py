@@ -85,7 +85,7 @@ def hash_string(input_string, algorithm='sha256'):
 
 
 if __name__ == '__main__':
-    folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'combined_forms', 'temp'))
+    folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'pdf'))
     print('****file****', folder)
     documents = read_files_in_folder(folder)
     chunk_and_upload(documents)
